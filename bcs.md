@@ -1,10 +1,10 @@
-# `The BCS`
+# The BCS
 
-`“BCS” stands for “Beryllium Community Standards.” It covers style, naming, the zen of Beryllium, etc. It is separated into separate documents.`
+“BCS” stands for “Beryllium Community Standards.” It covers style, naming, the zen of Beryllium, etc. It is separated into separate documents.
 
-# `BCS 1`
+# BCS 1
 
-`This part covers style and naming conventions.`
+This part covers style and naming conventions.
 
 | Formatting Rule | Standard Name |
 | :---: | :---: |
@@ -27,19 +27,19 @@
 | All types (including enums) must be **PascalCase** | Naming Conventions (Types) |
 | Enum members and constants must be **SCREAMING\_SNAKE\_CASE** | Naming Conventions (Constants) |
 
-`However, if there are previous codebases and the only reason for changing would be to keep in style with this, keep the style the same in those codebases.`
+However, if there are previous codebases and the only reason for changing would be to keep in style with this, keep the style the same in those codebases.
 
-`*this document uses tab and indent interchangeably to mean a shift right of code, and it only uses tab characters because google docs makes that far easier`  
-`**constants are things like pi which are guaranteed to never change. Even though the language makes things immutable by default, for example a generic local variable might need to be mutable eventually, so it is still a variable`
+*this document uses tab and indent interchangeably to mean a shift right of code, and it only uses tab characters because google docs makes that far easier  
+**constants are things like pi which are guaranteed to never change. Even though the language makes things immutable by default, for example a generic local variable might need to be mutable eventually, so it is still a variable
 
-# `BCS 2`
+# BCS 2
 
-`This is the Zen of Beryllium.`
+This is the Zen of Beryllium.
 
-1. `Explicit is better than implicit.`  
-2. `Safety exists by default.`  
-3. `Ownership kind is explicit.`  
-4. `Visibility is not hierarchy.`  
-5. `Zero-cost abstractions should be used wherever possible.`  
-6. `Pragmatism should be prioritized over following a random document.`  
-7. `Namespacing is important.`
+1. Explicit is better than implicit.  
+2. Safety exists by default.  
+3. Ownership kind is explicit.  
+4. Visibility is not hierarchy.  
+5. Zero-cost abstractions should be used wherever possible.  
+6. Pragmatism should be prioritized over following a random document.  
+7. Namespacing is important.
