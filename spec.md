@@ -38,3 +38,23 @@ Add u to the beginning to make it unsigned.
 - temp&lt;T&gt; (move type)
 - opt&lt;T&gt; (optional type)
 - variant&lt;T1, T2, T3, ...&gt; (tagged union)
+
+## Type Aliases
+
+Type aliases can be declared with the keyword `type` and an equals sign:
+
+```
+type MyInt = int;
+var x: int = 9;
+var y: MyInt = x;
+```
+
+Type aliases can be strong by using `strong`. That means there is no conversion anymore and it still inherits all the other type's properties and methods:
+
+```
+type strong Years = int;
+
+var x: int = 9;
+var y: Years = x; // compile error
+```
+
