@@ -60,3 +60,187 @@ var y: Years = x; // compile error
 ```
 
 Note that all types starting with a lowercase letter are reserved for the language.
+
+# Variable Declaring
+
+var varName: [optional hint, deduces automatically] = [value];
+var varName: [type];
+
+No initialization requires you to specify the type.
+Mutability is part of the type. By default, variables are immutable, for example:
+
+```
+func main() {
+    var i = 9;
+    i = 8; // compile error
+    var m: mut = 9;
+    var j: mut int = 9;
+    j = 10; // success
+    var b = true;
+    return 0;
+}
+```
+
+You can use `ref` to make a reference and infer the type of the reference alias, `mut` to make a mutable value, and `mut ref` to make a mutable alias and determine the type to be aliased. `mut` and `mut ref` can also take an explicit type. All global variables cannot be mutable.
+
+# Loops
+
+while loops (run until the condition is false)
+
+```
+while (condition) {
+    doSomething();
+}
+```
+
+for loop (runs until cond is false)
+
+```
+for (init; cond; increment) {
+    doSomething();
+}
+```
+
+do while loops (runs at least once)
+
+```
+do {
+    doSomething();
+} while (condition);
+```
+
+for each loop (loops through each of the elements in a container)
+
+```
+for (var el : container) {
+    doSomething();
+}
+```
+
+## Special
+
+repeat loops (repeats x times)
+
+```
+repeat (x) { // x is how many times to repeat
+    doSomething();
+}
+```
+
+# Control Script / Useful Functions
+
+Wait until conditional blocks.
+
+```
+wait(condition);
+```
+
+stops the current loop or script until a certain condition is met.
+
+quit script, exits the program
+
+```
+exit([exit code]);
+```
+
+if statement
+
+```
+if (cond) {
+    doSomething();
+}
+```
+
+functions
+
+```
+func impure doSomething(arg1: type1, arg2: type2): [optional return type, is inferred] {
+    std.out.println("Doing something");
+    return "done"; // no need to return something, can return nothing. Empty return is allowed.
+}
+```
+
+# IO
+
+Using the standard library, you can use print() to print a string to the console:
+
+```
+import std.io;
+
+func main() {
+    var x: string = "Hello, world!\n";
+    std.out.print(x);
+    return 0;
+}
+```
+
+If you need a newline, add a \n at the end or use println.
+You can do this to read from the console:
+
+```
+import std.io;
+
+func main() {
+    var str: mut string;
+    std.out.print("Enter a sentence: ");
+    std.in.read(str);
+    std.out.println("You entered: " + str);
+    return 0;
+}
+```
+
+We will cover more of the standard library in its own docs. This is not part of the standard, but it is used heavily in examples.
+
+# Namespaces
+
+You use namespaces like this:
+
+```
+namespace nsp {
+    func name() {
+        // do something
+    }
+}
+
+func main() {
+    nsp.name();
+    return 0;
+}
+```
+
+You access symbols inside of it with nsp.[member]. They can be disjoint. This is how the Beryllium Standard Library works.
+
+# System Settings
+
+To figure out what the computer specs are, there are built-in constants. The constant `OS` has the following values: "windows" for Windows, "linux" for Linux, "macOS" for macOS,... The constant `ARCH` has the following values: "x86" for x86, "x86-64" for x86-64, "ARM" for ARM, "ARM64" for ARM64,...
+
+# Casting
+
+Casting is important. Implicit casts are done automatically. Explicit casts are explicit. The rules are:
+- int to float is implicit
+- You can convert between smaller to larger int types implicitly
+- char conversions must be explicit to int and float types
+- float to int is explicit
+- smaller float to larger float is implicit
+- bool to any has to be explicit
+- Anything to bool has to explicit except in `if`, `while`, and `for` contexts
+
+To cast explicitly, you use `as T`.
+There are variations, so here is an example:
+
+```
+func main() {
+    var x: int = 9;
+    var y: byte = x; // implicit conversion NOT allowed because byte is smaller than int
+    var z: char = y; // not allowed, because chars are not ints (they are integral, but semantically not int)
+    var cursed_char = x as char; // explicit, allowed
+    var dec: double = x;
+    var pi = 3.14;
+    var pi_int: int = pi; // not allowed because float types to int types has to be explicit
+    var pi_int_legal: int = pi as int; // allowed
+    var reinterpet = pi as ulong unsafe; // unsafe makes it a bit reinterpretation, no value conversion ever
+    var def_illegal = pi as dynarr<string>; 
+
+    return 0;
+```
+
