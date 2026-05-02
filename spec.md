@@ -244,3 +244,44 @@ func main() {
     return 0;
 ```
 
+# Pointers and References
+
+Pointers are useful. They can be used to pass around data without copying. There are four different types of pointers:
+
+```
+ptr
+rcptr
+arcptr
+weakptr
+unsafeptr
+```
+
+The outside `mut` makes the pointer itself mutable. The inside of the angle brackets has a `mut` too. That makes the value pointed to mutable. In fact, the pointer types are the only types that allow inside `mut`. References just have the outer `mut` declare the mutability of the value. You can use `valat()` to get the value a pointer points to and `ptrto()` to get a pointer to an address. Now for the specific types:`ptr`:
+This one has unique ownership. You cannot copy it, and for classes, you must instantiate.
+`rcptr`:
+You can copy this one. It does reference counting, and if it goes to zero, it then frees the memory.
+`arcptr`:
+Similar to `rcptr` but reference counts atomically
+`weakptr`:
+This is a non-owning reference to memory. It does not change the reference count.
+`unsafeptr`:
+This is the unsafe C-style pointer. It does not have checks or deletion checks.
+You can freely implicitly convert between `adr` and `unsafeptr`. However, there is no value conversion between them and other pointer types.
+
+References are like pointers, but have to be seated and cannot move. You also don't have to explicitly dereference. Here is an example:
+
+```
+func main() {
+    var x = 420;
+    var y: ref<int> = x;
+    var z: mut = 420;
+    var w: ref = z; // immutable reference
+    var mut_ref: mut ref = z; // mutable reference
+    mut_ref = 69; // z is now 69
+    var illegal_ref: mut ref = x; // illegal because x is immutable
+    return 0;
+}
+```
+
+The value `nil` has many uses, but in this context it represents a null pointer to a guaranteed invalid location in memory. Pointers convert to false in a conditional if it is `nil`, and true otherwise. References have a special coercion rule in function parameters. If they are immutable, you don't need to mark anything. If the reference parameter is mutable, you have to explicitly mark the object being passed in with an ampersand.
+ 
