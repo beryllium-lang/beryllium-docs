@@ -35,9 +35,10 @@ Add u to the beginning to make it unsigned.
 - ref&lt;T&gt; (reference, similar to T&, has to be seated at initialization)
 - res&lt;T1, T2&gt; (can store a T1, can store an error value T2)
 - tup&lt;T1, T2, T3, ...&gt; (can store varying types, can be duplicates)
-- temp&lt;T&gt; (move type)
 - opt&lt;T&gt; (optional type)
 - variant&lt;T1, T2, T3, ...&gt; (tagged union)
+- slice&lt;T&gt; (a fat pointer with a pointer and length)
+- ref&lt;string&gt; (similar to slice&lt;byte&gt; but with string semantics)
 
 ## Type Aliases
 
@@ -58,3 +59,4 @@ var x: int = 9;
 var y: Years = x; // compile error
 ```
 
+Note that all types starting with a lowercase letter are reserved for the language.
