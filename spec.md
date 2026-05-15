@@ -313,3 +313,17 @@ Successful allocation!
 
 If you need a dynamic stack-allocated array to avoid the compile-time constraint in arr&gt;T, N&lt;, use `stackalloc[n]<T>`. Because it is on the stack, you don't delete it.
 
+# Passing Functions
+
+Functions can be passed around. To declare a function type, do:
+
+```
+func return_type([param types])
+```
+
+You can only pass in functions to a variable of that type with the same return type and parameter types. To call them, use normal function calling syntax. This is if you want any function of that signature. Each function is its own type, and it automatically coerces to the generic type. In generics, however, the function does not coerce to the function pointer, but instead to the singular function type.
+
+# Function Modifiers
+
+By default, Beryllium assumes most functions are pure. That is, they only use from the outside world what is passed into them and the immutable global variables. If you want to say, print something to the console, that is an impure operation and you need to mark your function impure. `main` is implicitly impure. The `impure` keyword is put after `func` but before the name. This is the same for any other modifiers.
+
