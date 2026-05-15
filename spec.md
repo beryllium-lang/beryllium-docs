@@ -32,12 +32,12 @@ Add u to the beginning to make it unsigned.
 - arcptr&lt;T&gt; (rcptr but atomic referencing counting)
 - weakptr&lt;T&gt; (non-owning reference counted)
 - unsafeptr&lt;T&gt; (raw pointer, similar to T* )
-- ref&lt;T&gt; (reference, similar to T&, has to be seated at initialization)
+- ref&lt;T, [optional lifetime name]&gt; (reference, similar to T&, has to be seated at initialization, lifetime checked)
 - res&lt;T1, T2&gt; (can store a T1, can store an error value T2)
 - tup&lt;T1, T2, T3, ...&gt; (can store varying types, can be duplicates)
 - opt&lt;T&gt; (optional type)
 - variant&lt;T1, T2, T3, ...&gt; (tagged union)
-- slice&lt;T&gt; (a fat pointer with a pointer and length)
+- slice&lt;T, [optional lifetime name]&gt; (a fat pointer with a pointer and length, lifetime checked)
 - ref&lt;string&gt; (similar to slice&lt;byte&gt; but with string semantics)
 
 ## Type Aliases
