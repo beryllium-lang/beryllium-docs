@@ -285,3 +285,31 @@ func main() {
 
 The value `nil` has many uses, but in this context it represents a null pointer to a guaranteed invalid location in memory. Pointers convert to false in a conditional if it is `nil`, and true otherwise. References have a special coercion rule in function parameters. If they are immutable, you don't need to mark anything. If the reference parameter is mutable, you have to explicitly mark the object being passed in with an ampersand.
  
+# Stack and Heap Allocation
+
+This section only applies for `adr` and `unsafeptr`.
+
+The heap is for this spec is defined as a long-lasting, dynamically sized chunk of memory. It contains much more memory than the stack. It also lasts much longer. It does not automatically delete upon leavong a scope.
+
+By default, all variables are stack-allocated. Stack-allocated memory is freed upon leaving the scope, so it is not good for long-lasting memory. You can allocate memory on the heap with `heapalloc[N]<T>()`. N is an unsigned int. `heapalloc` returns an `adr`. To free the memory, use `free(adr)`. You have to use array allocation. For singles, use [1] in the heapalloc. It returns a res&gt;adr, string&lt;:
+
+```
+import std.io;
+
+func main() {
+    var x = heapalloc[3]<int>();
+    if (x.is_valid()) {
+        std.out.println("Successful allocation!");
+        free(x.get());
+    }
+    return 0;
+}
+
+/*
+output
+Successful allocation!
+*/
+```
+
+If you need a dynamic stack-allocated array to avoid the compile-time constraint in arr&gt;T, N&lt;, use `stackalloc[n]<T>`. Because it is on the stack, you don't delete it.
+
